@@ -1,15 +1,12 @@
 # Time manager
 
-Time manager is a simple app to register work sessions.
-<p>&nbsp;</p>
+Time manager is an app that allow companies and their employees to manage working duration and timing.
 
-# API set-up
-## <strong>Installation</strong>
+## <strong>API Installation</strong>
 
-### <strong> Linux (WSL2) installation : </strong>
+### <strong>Linux (WSL2) installation:</strong>
 
 The lastest versions of Elixir (1.13.4) and Erlang/OTP 25 has to be install as follow :
-
 
 ### 1. Retrieved latest package version for Elixir and Erlang
 ```bash
