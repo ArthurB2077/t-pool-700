@@ -258,12 +258,6 @@ Generic command : docker exec -u postgresuser containername psql dbname postgres
 ```bash
 $ docker-compose -f docker-compose.yml -p dev exec -u postgres db_dev psql db_dev postgres -f /docker-entrypoint-initdb.d/init.sql
 ```
-
-<p>&nbsp;</p>
-
-## Contributing
-Pull requests are welcome !
-
 <p>&nbsp;</p>
 
 ## License
