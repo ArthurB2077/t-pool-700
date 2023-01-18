@@ -1,6 +1,38 @@
 # Time manager
 
-Time manager is an app that allow companies and their employees to manage working duration and timing.
+Time manager is an app that allow companies and their employees to manage working duration and timing
+
+Rumors of strikes and resignations run, and the main union (CGT-U, which stands for City of Gotham TradeUnion) alerts the mayor and senior officials of the town hall of the urgency of the situation: \
+  • employees complaining about the working conditions \
+  • long shifts \
+  • the deplorable state of the city \
+  • Batman’s lack of scruples
+
+To calm the tensions, the town hall decides to make a state of play of the situation, and why not, to allow
+the municipal workers to have access to some days off to recuperate \
+For this, it needs to set up a time management application, that you must develop
+
+Within the company, there are three categories of users: \
+  • the employees \
+  • the managers \
+  • the general manager
+
+All users can: \
+  • Edit their account information \
+  • Delete their account \
+  • Report their departure and arrival times \
+  • View their dashboards \
+
+The managers and general manager can: \
+  • Manage their team(s) \
+  • View the averages of the daily and weekly hours of the team over a given period \
+  • View the daily and weekly working hours of an employee over a period of time \
+  • View their employees’ dashboards \
+
+The general manager can : \
+  • Promote a user from the rank of employee to manager \
+  • View the dashboards of all users \
+
 
 ## <strong>API Installation</strong>
 
