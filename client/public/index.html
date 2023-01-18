@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <meta name="viewport" content="width=device-width,initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, user-scalable=0"/>
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title>Time manager</title>
+  </head>
+  <body>
+    <noscript>
+      <strong>You need to enable Javascript pour run this page.</strong>
+    </noscript>
+    <div id="app"></div>
+
+    <!-- CSS only 
+    -->
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script>
+      const resizeOps = () => {
+        document.documentElement.style.setProperty("--vh", window.innerHeight * 0.01 + "px");
+      };
+
+      resizeOps();
+      window.addEventListener("resize", resizeOps);
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>    
+    <!-- built files will be auto injected -->
+  </body>
+</html>

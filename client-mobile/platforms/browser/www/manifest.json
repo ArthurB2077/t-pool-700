@@ -1,0 +1,16 @@
+{
+  "background_color": "#FFF",
+  "display": "standalone",
+  "name": "TimeManager",
+  "short_name": "TimeManager",
+  "version": "ovh.timemanager",
+  "description": "A time management application",
+  "icons": [
+    {
+      "src": "www/img/app-icon.png",
+      "type": "image/png",
+      "sizes": "undefinedxundefined"
+    }
+  ],
+  "start_url": "index.html"
+}

@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="ovh.timemanager" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>TimeManager</name>
+    <description>A time management application</description>
+    <icon src="www/img/app-icon.png" />
+
+    <platform name="ios">
+    <icon src="ios-icon.png" />
+    <splash src="res/screen/ios/Default~iphone.png" width="320" height="480"/>
+    <splash src="res/screen/ios/Default@2x~iphone.png" width="640" height="960"/>
+
+    </platform>
+        <platform name="android">
+        <!-- <icon src="android-icon.png" /> -->
+    </platform>
+
+    <content src="index.html" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <cordova>
+        <access origin="http://time-manager.ovh*"/>
+    </cordova>
+</widget>

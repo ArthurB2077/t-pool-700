@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <!--
+        Customize this policy to fit your own app's needs. For more guidance, please refer to the docs:
+            https://cordova.apache.org/docs/en/latest/
+        Some notes:
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' data: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <link rel="icon" href="/favicon.ico">
+    <link href="/css/chunk-vendors.e3a31037.css" rel="stylesheet">
+    <link href="/css/app.5f9edcee.css" rel="stylesheet">
+    <title>Time manager</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script>
+        const resizeOps = () => {
+            document.documentElement.style.setProperty("--vh", window.innerHeight * 0.01 + "px");
+        };
+
+        resizeOps();
+        window.addEventListener("resize", resizeOps);
+    </script>
+    <script src="cordova.js"></script>
+    <script src="js/index.js"></script>
+    <script defer="defer" src="/js/chunk-vendors.1d036c70.js"></script>
+    <script defer="defer" src="/js/app.3a108882.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+
+</html>

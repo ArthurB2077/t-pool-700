@@ -1,0 +1,85 @@
+image: docker:20.10.16
+
+variables:
+  DOCKER_TLS_CERTDIR: "/certs"
+  POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+  POSTGRES_USER: $POSTGRES_USER
+  POSTGRES_DB: $POSTGRES_DB
+  PGDATA: $PGDATA
+  PGADMIN_DEFAULT_EMAIL: $PGADMIN_DEFAULT_EMAIL
+  PGADMIN_DEFAULT_PASSWORD: $PGADMIN_DEFAULT_PASSWORD
+  
+services:
+  - docker:20.10.16-dind
+
+stages:
+  - build
+  - test
+  - deploy
+
+build-job:
+
+  stage: build
+  script:
+    - docker-compose version
+    - echo "$CI_REGISTRY_PASSWORD"| docker login -u "$CI_REGISTRY_USER" --password-stdin
+    - echo "Building..."
+    - rm client/.env client/.env.production
+    - mv client/.env.deploy client/.env
+    - docker-compose -f docker-compose-deploy.yml -p deploy build --no-cache
+    - echo "Pushing..."
+    - docker-compose -f docker-compose-deploy.yml -p deploy push
+  when: manual
+  tags:
+    - test
+
+unit-test-job:
+  before_script:
+   - apk --update add nodejs npm
+  stage: test
+  script:
+    - echo "$CI_REGISTRY_PASSWORD"| docker login -u "$CI_REGISTRY_USER" --password-stdin
+    - echo "Running unit tests... This will take about 60 seconds."
+    - ls -la
+    - docker-compose -f docker-compose-bdd.yml -p deploy build --no-cache
+    - docker pull oneflow12/test:latest_api
+    - docker pull oneflow12/test:latest_client
+    - docker-compose -f docker-compose-deploy.yml -p deploy up -d
+    - docker compose -f docker-compose-deploy.yml -p deploy exec api_prod bin/api eval "Api.Release.migrate"
+    - docker compose -f docker-compose-deploy.yml -p deploy exec -u root db_prod psql db_prod root -f /docker-entrypoint-initdb.d/init.sql
+    - cd client
+    - npm install
+    - npm test
+  when: manual
+  tags:
+    - test
+
+deploy-job:
+  stage: deploy
+  environment: production
+  script:
+    - echo "$CI_REGISTRY_PASSWORD"| docker login -u "$CI_REGISTRY_USER" --password-stdin
+    - rm -rf /home/gitlab-runner/time-manager
+    - cp -r ../time-manager /home/gitlab-runner/time-manager
+    - cd  /home/gitlab-runner/time-manager
+    - rm client/.env client/.env.production
+    - mv client/.env.deploy client/.env
+    - docker compose -f docker-compose-bdd.yml -p deploy build --no-cache
+    - docker pull oneflow12/test:latest_api
+    - docker pull oneflow12/test:latest_client
+    - docker compose -f docker-compose-deploy.yml -p deploy up -d
+    - docker compose -f docker-compose-deploy.yml -p deploy exec api_prod bin/api eval "Api.Release.migrate"
+    # - docker compose -f docker-compose-deploy.yml -p deploy exec -u root db_prod psql db_prod root -f /docker-entrypoint-initdb.d/init.sql
+  when: manual
+  tags:
+    - deploy
+
+init-db-only-when-empty-database-job:
+  stage: deploy
+  environment: client/.env.production
+  script:
+    - cd  /home/gitlab-runner/time-manager
+    - docker compose -f docker-compose-deploy.yml -p deploy exec -u root db_prod psql db_prod root -f /docker-entrypoint-initdb.d/init.sql
+  when: manual
+  tags:
+    - deploy
